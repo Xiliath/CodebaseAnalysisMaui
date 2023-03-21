@@ -1,4 +1,4 @@
-﻿using CodebaseAnalysisLib;
+using CodebaseAnalysisLib;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using System;
@@ -10,7 +10,7 @@ namespace CodebaseAnalysisMauiApp
 {
     public partial class MainPage : ContentPage
     {
-        
+
 
         private readonly CodebaseAnalyzer _analyzer;
         private string _solutionPath;
@@ -50,7 +50,19 @@ namespace CodebaseAnalysisMauiApp
 
             try
             {
+                string solutionPath = CodebaseAnalyzer.GetSolutionPath();
+                string solutionDirectory = Path.GetDirectoryName(solutionPath);
                 var changes = JsonSerializer.Deserialize<List<SuggestedChange>>(json);
+                foreach (var change in changes)
+                {
+                    string filePath = Directory.GetFiles(solutionDirectory, change.FileName.TrimStart('\\'), SearchOption.AllDirectories).FirstOrDefault();
+
+                    if (string.IsNullOrEmpty(filePath))
+                    {
+                        throw new FileNotFoundException($"File '{change.FileName}' not found.");
+                    }
+                    change.FileName = filePath;
+                }
                 await SuggestedChange.ApplySuggestedChanges(changes);
                 await DisplayAlert("Success", "Suggested changes have been applied.", "OK");
             }

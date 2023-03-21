@@ -27,7 +27,7 @@
 
             <StackLayout Grid.Column="1">
                 <Label Text="Suggested Changes" />
-                <ScrollView HeightRequest="800">
+                <ScrollView HeightRequest="700">
                     <Editor x:Name="SuggestedChangesEditor" />
                 </ScrollView>
                 <Button Text="Apply Suggested Changes" Clicked="OnApplySuggestedChangesClicked" />
