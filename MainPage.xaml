@@ -9,6 +9,9 @@
         <!-- Add this line to include a button for opening the file picker -->
         <Button Text="Select .sln File" Clicked="OnFilePickerClicked" />
 
+        <!-- Add this label to display the solution path -->
+        <Label x:Name="SolutionPathLabel" Text="Solution Path: [default = running application]" />
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
