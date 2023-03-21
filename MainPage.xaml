@@ -15,13 +15,22 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Column="1">
+            <StackLayout Grid.Column="0">
                 <Label Text="Text for GPT" x:Name="CodebaseInfoLabel" />
                 <ScrollView HeightRequest="800">
                     <Editor x:Name="CodebaseInfo" IsReadOnly="True" />
                 </ScrollView>
+            </StackLayout>
+
+            <StackLayout Grid.Column="1">
+                <Label Text="Suggested Changes" />
+                <ScrollView HeightRequest="800">
+                    <Editor x:Name="SuggestedChangesEditor" />
+                </ScrollView>
+                <Button Text="Apply Suggested Changes" Clicked="OnApplySuggestedChangesClicked" />
             </StackLayout>
         </Grid>
     </StackLayout>

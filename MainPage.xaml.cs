@@ -4,6 +4,7 @@ using Microsoft.Maui.Storage;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text.Json;
 
 namespace CodebaseAnalysisMauiApp
 {
@@ -40,6 +41,22 @@ namespace CodebaseAnalysisMauiApp
             {
                 _solutionPath = fileResult.FullPath;
                 SolutionPathLabel.Text = $"Solution Path: {_solutionPath}";
+            }
+        }
+
+        private async void OnApplySuggestedChangesClicked(object sender, EventArgs e)
+        {
+            string json = SuggestedChangesEditor.Text;
+
+            try
+            {
+                var changes = JsonSerializer.Deserialize<List<SuggestedChange>>(json);
+                await SuggestedChange.ApplySuggestedChanges(changes);
+                await DisplayAlert("Success", "Suggested changes have been applied.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to apply suggested changes: {ex.Message}", "OK");
             }
         }
 
