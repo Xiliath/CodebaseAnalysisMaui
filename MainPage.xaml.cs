@@ -11,7 +11,6 @@ namespace CodebaseAnalysisMauiApp
     public partial class MainPage : ContentPage
     {
 
-
         private readonly CodebaseAnalyzer _analyzer;
         private string _solutionPath;
 
@@ -43,6 +42,9 @@ namespace CodebaseAnalysisMauiApp
                 SolutionPathLabel.Text = $"Solution Path: {_solutionPath}";
             }
         }
+
+
+
 
         private async void OnApplySuggestedChangesClicked(object sender, EventArgs e)
         {
